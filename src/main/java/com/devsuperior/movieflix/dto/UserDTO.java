@@ -17,6 +17,9 @@ public class UserDTO {
    private List<ReviewDTO> reviews = new ArrayList<>();
    private Set<RoleDTO> roles = new HashSet<>();
 
+   public UserDTO() {
+   }
+
    public UserDTO(String email, Long id, String name, String password) {
        this.email = email;
        this.id = id;

@@ -12,6 +12,9 @@ public class GenreDTO {
     private String name;
     private List<MovieDTO> movies = new ArrayList<>();
 
+    public GenreDTO() {
+    }
+
     public GenreDTO(Long id, String name) {
         this.id = id;
         this.name = name;

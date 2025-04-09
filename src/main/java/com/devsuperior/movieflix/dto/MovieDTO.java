@@ -19,6 +19,10 @@ public class MovieDTO {
     private Genre genre;
     private List<ReviewDTO> reviews = new ArrayList<>();
 
+    public MovieDTO() {
+        
+    }
+
     public MovieDTO(Genre genre, Long id, String imgUrl, String subTitle, String synopsis, String title, Integer year) {
         this.genre = genre;
         this.id = id;

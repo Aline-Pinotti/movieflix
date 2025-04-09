@@ -11,6 +11,9 @@ public class ReviewDTO {
     private MovieDTO movie;
     private UserDTO user;
 
+    public ReviewDTO() {
+    }
+
     public ReviewDTO(Long id, String text, MovieDTO movie, UserDTO user) {
         this.id = id;
         this.text = text;
