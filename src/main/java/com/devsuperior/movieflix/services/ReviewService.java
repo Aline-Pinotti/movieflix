@@ -32,6 +32,9 @@ public class ReviewService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AuthService authService;
+
     @Transactional(readOnly = true)
 	public Page<ReviewDTO> findAllPaged(Pageable pageable) {
 		Page<Review> list = repository.findAll(pageable);
@@ -49,7 +52,7 @@ public class ReviewService {
 	public ReviewDTO insert(ReviewDTO dto) {
 		Review entity = new Review();
 		copyDtoToEntity(dto, entity);
-        //TODO: Pegar User da Sessão
+        entity.setUser(authService.authenticated()); // usuário logado
         entity = repository.save(entity);        
 		return new ReviewDTO(entity);
 	}
