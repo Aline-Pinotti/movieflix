@@ -1,5 +1,6 @@
 package com.devsuperior.movieflix.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.devsuperior.movieflix.dto.UserInsertDTO;
 import com.devsuperior.movieflix.dto.UserUpdateDTO;
 import com.devsuperior.movieflix.entities.Role;
 import com.devsuperior.movieflix.entities.User;
+import com.devsuperior.movieflix.projections.UserDetailsProjection;
 import com.devsuperior.movieflix.repositories.RoleRepository;
 import com.devsuperior.movieflix.repositories.UserRepository;
 import com.devsuperior.movieflix.services.exceptions.DatabaseException;
@@ -107,10 +109,21 @@ public class UserService implements UserDetailsService {
 	}
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loadUserByUsername'");
-    }
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		List<UserDetailsProjection> result = repository.searchUserAndRolesByEmail(username);
+        
+		if (result.isEmpty()) {
+			throw new UsernameNotFoundException("Email not found");
+		}
+
+		User user = new User(result.get(0).getUsername(), result.get(0).getPassword());
+		for (UserDetailsProjection projection : result) {
+			user.addRole(new Role(projection.getRoleId(), projection.getAuthority()));
+		}
+
+		return user;
+
+	}
     
    
 }
