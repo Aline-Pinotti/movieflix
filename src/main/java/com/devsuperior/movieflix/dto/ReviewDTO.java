@@ -4,28 +4,31 @@ import java.util.Objects;
 
 import com.devsuperior.movieflix.entities.Review;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class ReviewDTO {
 
-    private Long id;   
+    private Long id;
+    @NotBlank(message = "Não é permitido texto vazio na avaliação")
     private String text;
-    private MovieDTO movie;
-    private UserDTO user;
+    private Long movieId;
+    private Long userId;   
 
     public ReviewDTO() {
     }
 
-    public ReviewDTO(Long id, String text, MovieDTO movie, UserDTO user) {
+    public ReviewDTO(Long id, String text, Long movie, Long user) {
         this.id = id;
         this.text = text;
-        this.movie = movie;
-        this.user = user;
+        this.movieId = movie;
+        this.userId = user;
     }
 
     public ReviewDTO(Review entity) {
         id = entity.getId();
         text = entity.getText();
-        movie = new MovieDTO(entity.getMovie());
-        user = new UserDTO(entity.getUser());
+        movieId = entity.getMovie().getId();
+        userId = entity.getUser().getId();
     }
 
     public Long getId() {
@@ -37,21 +40,25 @@ public class ReviewDTO {
     public String getText() {
         return text;
     }
+
     public void setText(String text) {
         this.text = text;
     }
-    public MovieDTO getMovie() {
-        return movie;
-    }
-    public void setMovie(MovieDTO movie) {
-        this.movie = movie;
-    }
-    public UserDTO getUser() {
-        return user;
+    
+    public Long getMovieId() {
+        return movieId;
     }
 
-    public void setUser(UserDTO user) {
-        this.user = user;
+    public void setMovieId(Long movieId) {
+        this.movieId = movieId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
     
     @Override

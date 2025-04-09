@@ -1,15 +1,12 @@
 package com.devsuperior.movieflix.dto;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import com.devsuperior.movieflix.entities.Movie;
-import com.devsuperior.movieflix.entities.Review;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class MovieDTO {
+public class MovieMinDTO {
 
     private Long id;
     @NotBlank(message = "Campo obrigatório")
@@ -17,35 +14,28 @@ public class MovieDTO {
     private String subTitle;
     private Integer year;
     private String imgUrl;    
-    private String synopsis;
     private Long genreId;
-    private List<ReviewDTO> reviews = new ArrayList<>();
 
-    public MovieDTO() {
+    public MovieMinDTO() {
         
     }
 
-    public MovieDTO(Long genre, Long id, String imgUrl, String subTitle, String synopsis, String title, Integer year) {       
+    public MovieMinDTO(Long genre, Long id, String imgUrl, String subTitle, String title, Integer year) {
+        this.genreId = genre;
         this.id = id;
         this.imgUrl = imgUrl;
         this.subTitle = subTitle;
-        this.synopsis = synopsis;
         this.title = title;
         this.year = year;
-        this.genreId = genre;
     }
 
-    public MovieDTO(Movie entity) {
+    public MovieMinDTO(Movie entity) {
         id = entity.getId();
         title = entity.getTitle();
         subTitle = entity.getSubTitle();
         year = entity.getYear();
         imgUrl = entity.getImgUrl();
-        synopsis = entity.getSynopsis();
-        genreId = entity.getGenre().getId();
-        for (Review review : entity.getReviews()) {
-            reviews.add(new ReviewDTO(review));
-        }
+        genreId = entity.getGenre().getId();        
     }
 
     public Long getId() {
@@ -88,29 +78,14 @@ public class MovieDTO {
         this.imgUrl = imgUrl;
     }
 
-    public String getSynopsis() {
-        return synopsis;
-    }
-
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
-    }
-
     public Long getGenreId() {
         return genreId;
     }
 
-    public void setGenre(Long genre) {
+    public void setGenreId(Long genre) {
         this.genreId = genre;
     }
-
-    public List<ReviewDTO> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<ReviewDTO> reviews) {
-        this.reviews = reviews;
-    }
+   
 
     @Override
 	public int hashCode() {
@@ -125,7 +100,7 @@ public class MovieDTO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MovieDTO other = (MovieDTO) obj;
+		MovieMinDTO other = (MovieMinDTO) obj;
 		return Objects.equals(id, other.id);
 	}
 

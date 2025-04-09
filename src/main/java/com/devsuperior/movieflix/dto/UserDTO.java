@@ -8,10 +8,15 @@ import java.util.Set;
 
 import com.devsuperior.movieflix.entities.User;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 public class UserDTO {
 
    private Long id;
+   @NotBlank(message = "Campo obrigatório")
    private String name;
+   @Email(message = "Favor entrar um email válido")  
    private String email;
    private String password;
    private List<ReviewDTO> reviews = new ArrayList<>();

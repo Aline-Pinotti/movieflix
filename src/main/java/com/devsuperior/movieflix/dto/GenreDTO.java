@@ -6,9 +6,12 @@ import java.util.Objects;
 
 import com.devsuperior.movieflix.entities.Genre;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class GenreDTO {
 
     private Long id;
+    @NotBlank(message = "Campo obrigatório")
     private String name;
     private List<MovieDTO> movies = new ArrayList<>();
 
