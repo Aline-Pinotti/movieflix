@@ -4,7 +4,7 @@ Protótipos de tela
 https://www.figma.com/file/6JQVnxKgKtVHLleSBBgRin/MovieFlix-front-listagem
 
 Modelo conceitual
-![alt text](modconc.png)
+![alt text](resources/modconc.png)
 
 
 ### Casos de uso
