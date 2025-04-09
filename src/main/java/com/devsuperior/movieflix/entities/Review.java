@@ -29,6 +29,10 @@ public class Review {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Review() {
+
+    }
+
     public Review(Long id, Movie movie, String text, User user) {
         this.id = id;
         this.movie = movie;
