@@ -86,8 +86,8 @@ public class ReviewService {
     
     private void copyDtoToEntity(ReviewDTO dto, Review entity) {
         entity.setText(dto.getText());
-        entity.setMovie(movieRepository.getReferenceById(dto.getMovie().getId()));
-        entity.setUser(userRepository.getReferenceById(dto.getUser().getId()));     
+        entity.setMovie(movieRepository.getReferenceById(dto.getMovieId()));
+        entity.setUser(userRepository.getReferenceById(dto.getUserId()));     
     }
 
 }
