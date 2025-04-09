@@ -35,7 +35,7 @@ public class User implements UserDetails{
     private String password;
 
     @OneToMany(mappedBy = "user")
-    private List<Review> review = new ArrayList<>();
+    private List<Review> reviews = new ArrayList<>();
    
     @ManyToMany
     @JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -89,8 +89,8 @@ public class User implements UserDetails{
         this.password = password;
     }
          
-    public List<Review> getReview() {
-        return review;
+    public List<Review> getReviews() {
+        return reviews;
     }
 
     public Set<Role> getRoles() {

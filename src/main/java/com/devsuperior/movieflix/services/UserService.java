@@ -36,7 +36,10 @@ public class UserService implements UserDetailsService {
     private UserRepository repository;
 
     @Autowired
-    private RoleRepository roleRepository;
+	private RoleRepository roleRepository;
+
+	@Autowired
+	private AuthService authService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -51,6 +54,12 @@ public class UserService implements UserDetailsService {
 	public UserDTO findById(Long id) {
 		Optional<User> obj = repository.findById(id);
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
+		return new UserDTO(entity);
+	}
+
+	@Transactional(readOnly = true)
+	public UserDTO findMe() {
+		User entity = authService.authenticated();		
 		return new UserDTO(entity);
 	}
 
