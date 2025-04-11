@@ -73,7 +73,7 @@ public class AuthService {
 	public void saveNewPassword(NewPasswordDTO body) {
 		List<PasswordRecover> list = passwordRecoverRepository.searchValidTokens(body.getToken(), Instant.now());
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			throw new ResourceNotFoundException("Token inválido!");
 		}
 

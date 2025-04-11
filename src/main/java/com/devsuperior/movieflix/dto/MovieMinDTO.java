@@ -12,7 +12,7 @@ public class MovieMinDTO {
     @NotBlank(message = "Campo obrigatório")
     private String title;
     private String subTitle;
-    private Integer year;
+    private Integer publishedAt;
     private String imgUrl;    
     private Long genreId;
 
@@ -26,14 +26,14 @@ public class MovieMinDTO {
         this.imgUrl = imgUrl;
         this.subTitle = subTitle;
         this.title = title;
-        this.year = year;
+        this.publishedAt = year;
     }
 
     public MovieMinDTO(Movie entity) {
         id = entity.getId();
         title = entity.getTitle();
         subTitle = entity.getSubTitle();
-        year = entity.getYear();
+        publishedAt = entity.getYear();
         imgUrl = entity.getImgUrl();
         genreId = entity.getGenre().getId();        
     }
@@ -62,12 +62,12 @@ public class MovieMinDTO {
         this.subTitle = subTitle;
     }
 
-    public Integer getYear() {
-        return year;
+    public Integer getPublishedAt() {
+        return publishedAt;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setPublishedAt(Integer year) {
+        this.publishedAt = year;
     }
 
     public String getImgUrl() {

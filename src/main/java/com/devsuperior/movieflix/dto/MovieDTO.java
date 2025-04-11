@@ -15,34 +15,34 @@ public class MovieDTO {
     @NotBlank(message = "Campo obrigatório")
     private String title;
     private String subTitle;
-    private Integer year;
+    private Integer publishedAt;
     private String imgUrl;    
     private String synopsis;
-    private Long genreId;
+    private GenreDTO genre;
     private List<ReviewDTO> reviews = new ArrayList<>();
 
     public MovieDTO() {
         
     }
 
-    public MovieDTO(Long genre, Long id, String imgUrl, String subTitle, String synopsis, String title, Integer year) {       
+    public MovieDTO(GenreDTO genre, Long id, String imgUrl, String subTitle, String synopsis, String title, Integer year) {       
         this.id = id;
         this.imgUrl = imgUrl;
         this.subTitle = subTitle;
         this.synopsis = synopsis;
         this.title = title;
-        this.year = year;
-        this.genreId = genre;
+        this.publishedAt = year;
+        this.genre = genre;
     }
 
     public MovieDTO(Movie entity) {
         id = entity.getId();
         title = entity.getTitle();
         subTitle = entity.getSubTitle();
-        year = entity.getYear();
+        publishedAt = entity.getYear();
         imgUrl = entity.getImgUrl();
         synopsis = entity.getSynopsis();
-        genreId = entity.getGenre().getId();
+        genre = new GenreDTO(entity.getGenre());
         for (Review review : entity.getReviews()) {
             reviews.add(new ReviewDTO(review));
         }
@@ -72,12 +72,12 @@ public class MovieDTO {
         this.subTitle = subTitle;
     }
 
-    public Integer getYear() {
-        return year;
+    public Integer getPublishedAt() {
+        return publishedAt;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setPublishedAt(Integer year) {
+        this.publishedAt = year;
     }
 
     public String getImgUrl() {
@@ -96,12 +96,12 @@ public class MovieDTO {
         this.synopsis = synopsis;
     }
 
-    public Long getGenreId() {
-        return genreId;
+    public GenreDTO getGenre() {
+        return genre;
     }
 
-    public void setGenre(Long genre) {
-        this.genreId = genre;
+    public void setGenre(GenreDTO genre) {
+        this.genre = genre;
     }
 
     public List<ReviewDTO> getReviews() {

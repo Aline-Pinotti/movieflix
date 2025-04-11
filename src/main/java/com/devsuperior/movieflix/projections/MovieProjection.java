@@ -6,7 +6,9 @@ public interface MovieProjection extends IdProjection<Long> {
     String getTitle();
     String getSubTitle();
     String getSynopsis();
-    Integer getYear();
-    String getImgUrl();   
+    Integer getPublishedAt();
+    String getImgUrl();
+    Long getGenreId();
+    String getGenreName(); 
 
 }
