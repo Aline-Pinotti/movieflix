@@ -12,23 +12,24 @@ public class ReviewDTO {
     @NotBlank(message = "Não é permitido texto vazio na avaliação")
     private String text;
     private Long movieId;
-    private Long userId;   
+    private UserMinDTO user;
 
     public ReviewDTO() {
     }
 
-    public ReviewDTO(Long id, String text, Long movie, Long user) {
+    public ReviewDTO(Long id, String text, Long movie, UserMinDTO user) {
         this.id = id;
         this.text = text;
         this.movieId = movie;
-        this.userId = user;
+        this.user = user;
     }
 
     public ReviewDTO(Review entity) {
         id = entity.getId();
+        System.out.println("ID: " + id);
         text = entity.getText();
         movieId = entity.getMovie().getId();
-        userId = entity.getUser().getId();
+        user = new UserMinDTO(entity.getUser());
     }
 
     public Long getId() {
@@ -52,13 +53,13 @@ public class ReviewDTO {
     public void setMovieId(Long movieId) {
         this.movieId = movieId;
     }
-
-    public Long getUserId() {
-        return userId;
+    
+    public UserMinDTO getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(UserMinDTO user) {
+        this.user = user;
     }
     
     @Override

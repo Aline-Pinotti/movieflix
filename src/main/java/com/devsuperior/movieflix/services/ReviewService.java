@@ -52,7 +52,10 @@ public class ReviewService {
 	public ReviewDTO insert(ReviewDTO dto) {
 		Review entity = new Review();
 		copyDtoToEntity(dto, entity);
-        entity.setUser(authService.authenticated()); // usuário logado
+
+		entity.setUser(authService.authenticated()); // usuário logado
+		System.out.println("Service::User: " + entity.getUser().getId());
+
         entity = repository.save(entity);        
 		return new ReviewDTO(entity);
 	}
@@ -86,8 +89,7 @@ public class ReviewService {
     
     private void copyDtoToEntity(ReviewDTO dto, Review entity) {
         entity.setText(dto.getText());
-        entity.setMovie(movieRepository.getReferenceById(dto.getMovieId()));
-        entity.setUser(userRepository.getReferenceById(dto.getUserId()));     
+        entity.setMovie(movieRepository.getReferenceById(dto.getMovieId()));    
     }
 
 }

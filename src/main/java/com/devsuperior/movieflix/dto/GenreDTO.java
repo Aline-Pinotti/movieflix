@@ -1,7 +1,5 @@
 package com.devsuperior.movieflix.dto;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import com.devsuperior.movieflix.entities.Genre;
@@ -13,7 +11,7 @@ public class GenreDTO {
     private Long id;
     @NotBlank(message = "Campo obrigatório")
     private String name;
-    private List<MovieDTO> movies = new ArrayList<>();
+    //private List<MovieDTO> movies = new ArrayList<>();
 
     public GenreDTO() {
     }
@@ -41,7 +39,7 @@ public class GenreDTO {
     public void setName(String name) {
         this.name = name;
     }
-    public List<MovieDTO> getMovies() {
+    /*public List<MovieDTO> getMovies() {
         return movies;
     }
     public void setMovies(List<MovieDTO> movies) {
@@ -51,7 +49,7 @@ public class GenreDTO {
     @Override
 	public int hashCode() {
 		return Objects.hash(id);
-	}
+	}*/
 
 	@Override
 	public boolean equals(Object obj) {
