@@ -14,7 +14,6 @@ import com.devsuperior.movieflix.dto.ReviewDTO;
 import com.devsuperior.movieflix.entities.Review;
 import com.devsuperior.movieflix.repositories.MovieRepository;
 import com.devsuperior.movieflix.repositories.ReviewRepository;
-import com.devsuperior.movieflix.repositories.UserRepository;
 import com.devsuperior.movieflix.services.exceptions.DatabaseException;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 
@@ -28,9 +27,6 @@ public class ReviewService {
 
     @Autowired
     private MovieRepository movieRepository;
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private AuthService authService;

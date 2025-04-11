@@ -1,11 +1,10 @@
 package com.devsuperior.movieflix.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devsuperior.movieflix.dto.GenreDTO;
 import com.devsuperior.movieflix.entities.Genre;
 import com.devsuperior.movieflix.repositories.GenreRepository;
-import com.devsuperior.movieflix.repositories.MovieRepository;
 import com.devsuperior.movieflix.services.exceptions.DatabaseException;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 
@@ -25,13 +23,11 @@ public class GenreService {
     @Autowired
     private GenreRepository repository;
 
-    @Autowired
-    private MovieRepository movieRepository;
 
     @Transactional(readOnly = true)
-	public Page<GenreDTO> findAllPaged(Pageable pageable) {
-		Page<Genre> list = repository.findAll(pageable);
-		return list.map(x -> new GenreDTO(x));
+	public List<GenreDTO> findAll() {
+		List<Genre> list = repository.findAll();
+		return list.stream().map(x -> new GenreDTO(x)).toList();
 	}
 
 	@Transactional(readOnly = true)
@@ -44,8 +40,7 @@ public class GenreService {
 	@Transactional
 	public GenreDTO insert(GenreDTO dto) {
 		Genre entity = new Genre();
-		copyDtoToEntity(dto, entity);
-        //TODO: Pegar User da Sessão
+		entity.setName(dto.getName());
         entity = repository.save(entity);        
 		return new GenreDTO(entity);
 	}
@@ -55,7 +50,7 @@ public class GenreService {
 	public GenreDTO update(Long id, GenreDTO dto) {
 		try {
 			Genre entity = repository.getReferenceById(id);
-			copyDtoToEntity(dto, entity);
+			entity.setName(dto.getName());
 			entity = repository.save(entity);
 			return new GenreDTO(entity);
 		}
@@ -76,10 +71,4 @@ public class GenreService {
         }
     }
     
-    
-    private void copyDtoToEntity(GenreDTO dto, Genre entity) {
-        entity.setName(dto.getName());
-        dto.getMovies().stream().map(x -> entity.getMovies().add(movieRepository.getReferenceById(x.getId())));
-    }
-
 }
